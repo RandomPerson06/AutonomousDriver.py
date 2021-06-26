@@ -172,7 +172,7 @@ def run_simulation(genomes, config):
     clock = pygame.time.Clock()
     generation_font = pygame.font.SysFont("Arial", 30)
     alive_font = pygame.font.SysFont("Arial", 20)
-    game_map = pygame.image.load('map2_extended.png').convert() # Convert Speeds Up A Lot
+    game_map = pygame.image.load('map2.png').convert() # Convert Speeds Up A Lot
 
     global current_generation
     current_generation += 1
@@ -225,12 +225,12 @@ def run_simulation(genomes, config):
         # Display Info
         text = generation_font.render("Generation: " + str(current_generation), True, (0,0,0))
         text_rect = text.get_rect()
-        text_rect.center = (900, 450)
+        text_rect.center = (1100, 450)
         screen.blit(text, text_rect)
 
         text = alive_font.render("Still Alive: " + str(still_alive), True, (0, 0, 0))
         text_rect = text.get_rect()
-        text_rect.center = (900, 490)
+        text_rect.center = (1100, 490)
         screen.blit(text, text_rect)
 
         pygame.display.flip()
