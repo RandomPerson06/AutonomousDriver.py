@@ -236,11 +236,11 @@ def run_simulation(genomes, config):
         #Prints generation count and number of cars alive
         text = generation_font.render("Generation: " + str(current_generation), True, (0,0,0))
         text_rect = text.get_rect()
-        text_rect.center = (1100, 450)
+        text_rect.center = (200, 650)
         screen.blit(text, text_rect)
         text = alive_font.render("Still Alive: " + str(still_alive), True, (0, 0, 0))
         text_rect = text.get_rect()
-        text_rect.center = (1100, 490)
+        text_rect.center = (200, 690)
         screen.blit(text, text_rect)
 
         #Sets fps to 60
