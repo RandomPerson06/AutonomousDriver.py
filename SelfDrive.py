@@ -2,6 +2,7 @@ import math
 import random
 import sys
 import os
+from neat.population import Population
 
 #Pygame module is used to visualize the game
 import pygame
@@ -133,7 +134,7 @@ class Car:
 
     #Function to get the radar data
     def get_data(self):
-        # Get Distances To Border
+        #Get distance to border
         radars = self.radars
         return_values = [0, 0, 0, 0, 0]
         for i, radar in enumerate(radars):
@@ -145,7 +146,7 @@ class Car:
     def is_alive(self):
         return self.alive
 
-    #Rewardfunution for the AI to imporve over time
+    #Reward funution for the AI to imporve over time
     def get_reward(self):
         return self.distance / (CAR_SIZE_X / 2)
 
@@ -182,7 +183,7 @@ def run_simulation(genomes, config):
     clock = pygame.time.Clock()
     generation_font = pygame.font.SysFont("Arial", 30)
     alive_font = pygame.font.SysFont("Arial", 20)
-    game_map = pygame.image.load('map4.png').convert() # Convert Speeds Up A Lot
+    game_map = pygame.image.load('map2.png').convert() # Convert Speeds Up A Lot
 
     #Defines variable generation
     global current_generation
@@ -238,11 +239,15 @@ def run_simulation(genomes, config):
         text_rect = text.get_rect()
         text_rect.center = (200, 650)
         screen.blit(text, text_rect)
-        text = alive_font.render("Still Alive: " + str(still_alive), True, (0, 0, 0))
+        text = alive_font.render("Still Alive This Generation: " + str(still_alive), True, (0, 0, 0))
         text_rect = text.get_rect()
         text_rect.center = (200, 690)
         screen.blit(text, text_rect)
-
+        text = alive_font.render("Total Death Count: " + str((current_generation * int(config.pop_size)) - still_alive), True, (0, 0, 0))
+        text_rect = text.get_rect()
+        text_rect.center = (200, 730)
+        screen.blit(text, text_rect)
+        
         #Sets fps to 60
         pygame.display.flip()
         clock.tick(60)
@@ -263,5 +268,6 @@ if __name__ == "__main__":
     stats = neat.StatisticsReporter()
     population.add_reporter(stats)
     
-    #Runs simulation with max generations set to 1000
-    population.run(run_simulation, 1000)
+    #Runs simulation with max generations set to 10000
+    population.run(run_simulation, 10000)
+    print("e")
