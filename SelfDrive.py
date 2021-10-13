@@ -8,6 +8,7 @@ from neat.population import Population
 import pygame
 #N.E.A.T(NeuroEvolution of Augmenting Topologies), module is used for the ai to find out the right method to complete the track
 import neat
+import settings
 
 #Width and Height is set to the map defaults (Change only if you are adding a new map)
 WIDTH = 1697
@@ -56,8 +57,9 @@ class Car:
 
     #Function to draw the sprite(car) and the radars around it
     def draw(self, screen):
-        screen.blit(self.rotated_sprite, self.position) # Draw Sprite
-        self.draw_radar(screen) #OPTIONAL FOR SENSORS
+        screen.blit(self.rotated_sprite, self.position)
+        if settings.ShowRadar == True:
+            self.draw_radar(screen) #OPTIONAL FOR SENSORS
 
     #Function on how to draw the radars
     def draw_radar(self, screen):
@@ -183,8 +185,18 @@ def run_simulation(genomes, config):
     clock = pygame.time.Clock()
     generation_font = pygame.font.SysFont("Arial", 30)
     alive_font = pygame.font.SysFont("Arial", 20)
-    game_map = pygame.image.load('map2.png').convert() # Convert Speeds Up A Lot
-
+    if settings.racemap == 1:
+        game_map = pygame.image.load('map1.png').convert() # Convert Speeds Up A Lot
+    elif settings.racemap == 2:
+        game_map = pygame.image.load('map2.png').convert() # Convert Speeds Up A Lot
+    elif settings.racemap == 3:
+        game_map = pygame.image.load('map3.png').convert() # Convert Speeds Up A Lot
+    elif settings.racemap == 4:
+        game_map = pygame.image.load('map4.png').convert() # Convert Speeds Up A Lot
+    elif settings.racemap == 5:
+        game_map = pygame.image.load('map5.png').convert() # Convert Speeds Up A Lot
+        
+    
     #Defines variable generation
     global current_generation
     current_generation += 1
@@ -255,7 +267,8 @@ def run_simulation(genomes, config):
 if __name__ == "__main__":
     
     #Loads config from config.txt
-    config_path = "./config.txt"
+    #config_path = "./config.txt"
+    config_path = "config.txt"
     config = neat.config.Config(neat.DefaultGenome,
                                 neat.DefaultReproduction,
                                 neat.DefaultSpeciesSet,
@@ -268,6 +281,5 @@ if __name__ == "__main__":
     stats = neat.StatisticsReporter()
     population.add_reporter(stats)
     
-    #Runs simulation with max generations set to 10000
-    population.run(run_simulation, 10000)
-    print("e")
+    #Runs simulation with max generations set to 99,999,999
+    population.run(run_simulation, 99999999)
