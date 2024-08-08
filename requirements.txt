@@ -1,2 +1,4 @@
-neat
+neat-python
 pygame
+pygame-gui
+matplotlib
